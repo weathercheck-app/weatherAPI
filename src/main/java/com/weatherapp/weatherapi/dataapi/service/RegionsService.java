@@ -1,4 +1,4 @@
-package com.weatherapp.weatherapi.dataapi.dto;
+package com.weatherapp.weatherapi.dataapi.service;
 
 import com.weatherapp.weatherapi.dataapi.domain.RegionsEntity;
 import com.weatherapp.weatherapi.dataapi.repository.RegionsRepository;
@@ -25,7 +25,7 @@ public class RegionsService {
 
     public void generateApiUrls() throws IOException, JSONException {
         log.info("---------------------------------------------------service1");
-        for (int i = 1; i < 439; i++) { // 439
+        for (int i = 1; i < 101; i++) { // 439
             String apiurl = String.format(
                     "https://apis.data.go.kr/1360000/TourStnInfoService1/getTourStnVilageFcst1?ServiceKey=Dxhv%%2FFADXXMPmKxLHMxOkoyMrWL45dwTybbI8frUxCT1eyJKz0WstFSGR5f0XppdMp51F%%2FkluvX3%%2Bm4oTgJHJQ%%3D%%3D&pageNo=1&numOfRows=5&dataType=JSON&CURRENT_DATE=20250103&HOUR=0&COURSE_ID=%d",
                     i
@@ -68,6 +68,7 @@ public class RegionsService {
                             } else {
                                 log.info("Saving new region: " + regions);
                                 regionsRepository.save(regions);
+                                log.info("save i ------------------------------------",i);
                             }
                         }
                     } else {
