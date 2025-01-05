@@ -1,7 +1,7 @@
 package com.weatherapp.weatherapi.dataapi.service;
 
-import com.weatherapp.weatherapi.dataapi.domain.RegionsEntity;
-import com.weatherapp.weatherapi.dataapi.repository.RegionsRepository;
+import com.weatherapp.weatherapi.dataapi.domain.RegionsDataEntity;
+import com.weatherapp.weatherapi.dataapi.repository.RegionsDataRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.json.JSONArray;
@@ -19,9 +19,9 @@ import java.net.URL;
 @Log4j2
 @Transactional
 @RequiredArgsConstructor
-public class RegionsService {
+public class RegionsDataService {
 
-    private final RegionsRepository regionsRepository;
+    private final RegionsDataRepository regionsDataRepository;
 
     public void generateApiUrls() throws IOException, JSONException {
         log.info("---------------------------------------------------service1");
@@ -57,17 +57,17 @@ public class RegionsService {
 
                         for (int j = 0; j < itemArray.length(); j++) {
                             JSONObject item = itemArray.getJSONObject(j);
-                            RegionsEntity regions = new RegionsEntity();
+                            RegionsDataEntity regions = new RegionsDataEntity();
                             regions.setCname(item.optString("courseAreaName", "no name"));
                             regions.setSaname(item.optString("spotAreaName", "no name"));
                             regions.setSname(item.optString("spotName", "no name"));
 
                             // sname이 이미 존재하는지 확인
-                            if (regionsRepository.findBySname(regions.getSname()) != null) {
+                            if (regionsDataRepository.findBySname(regions.getSname()) != null) {
                                 log.info("Skipping duplicate sname: " + regions.getSname());
                             } else {
                                 log.info("Saving new region: " + regions);
-                                regionsRepository.save(regions);
+                                regionsDataRepository.save(regions);
                                 log.info("save i ------------------------------------",i);
                             }
                         }

@@ -1,7 +1,7 @@
 package com.weatherapp.weatherapi.dataapi.controller;
 
-import com.weatherapp.weatherapi.dataapi.service.RegionsService;
-import com.weatherapp.weatherapi.dataapi.service.WeatherService;
+import com.weatherapp.weatherapi.dataapi.service.RegionsDataService;
+import com.weatherapp.weatherapi.dataapi.service.WeatherDataService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.json.JSONException;
@@ -13,17 +13,17 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/weather")
+@RequestMapping("/api/v1/data/weather")
 @Log4j2
-public class WeatherController {
+public class WeatherDataController {
 
-    private final RegionsService regionsService;
-    private final WeatherService weatherService;
+    private final RegionsDataService regionsDataService;
+    private final WeatherDataService weatherDataService;
 
     @GetMapping("/regions")
     public void save() throws IOException, JSONException {
         log.info("---------------------------------------------------controller1");
-        regionsService.generateApiUrls();
+        regionsDataService.generateApiUrls();
         log.info("---------------------------------------------------controller2");
     }
 
@@ -31,7 +31,7 @@ public class WeatherController {
     public void saveTemper() throws IOException, JSONException {
         log.info("---------------------------------------------------controller1");
         int c_date = 20250104;
-        weatherService.generateApiUrls(c_date);
+        weatherDataService.generateApiUrls(c_date);
         log.info("---------------------------------------------------controller2");
 
     }

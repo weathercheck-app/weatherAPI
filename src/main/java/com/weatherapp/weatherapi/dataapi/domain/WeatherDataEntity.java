@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Table(name ="tbl_weather")
 @ToString(exclude = {"regions"})
-public class WeatherEntity {
+public class WeatherDataEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,7 @@ public class WeatherEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="rid")
-    private RegionsEntity regions;
+    private RegionsDataEntity regions;
 
 
 

@@ -1,4 +1,4 @@
-package com.weatherapp.weatherapi.dataapi.domain;
+package com.weatherapp.weatherapi.regions.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,9 +1,9 @@
 package com.weatherapp.weatherapi.dataapi.service;
 
-import com.weatherapp.weatherapi.dataapi.domain.RegionsEntity;
-import com.weatherapp.weatherapi.dataapi.domain.WeatherEntity;
-import com.weatherapp.weatherapi.dataapi.repository.RegionsRepository;
-import com.weatherapp.weatherapi.dataapi.repository.WeatherRepository;
+import com.weatherapp.weatherapi.dataapi.domain.RegionsDataEntity;
+import com.weatherapp.weatherapi.dataapi.domain.WeatherDataEntity;
+import com.weatherapp.weatherapi.dataapi.repository.RegionsDataRepository;
+import com.weatherapp.weatherapi.dataapi.repository.WeatherDataRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.json.JSONArray;
@@ -22,10 +22,10 @@ import java.sql.Timestamp;
 @Log4j2
 @Transactional
 @RequiredArgsConstructor
-public class WeatherService {
+public class WeatherDataService {
 
-    private final WeatherRepository weatherRepository;
-    private final RegionsRepository regionsRepository;
+    private final WeatherDataRepository weatherDataRepository;
+    private final RegionsDataRepository regionsDataRepository;
 
     public void generateApiUrls(int c_date) throws IOException, JSONException {
         log.info("---------------------------------------------------service1");
@@ -65,7 +65,7 @@ public class WeatherService {
 
                             for (int j = 0; j < itemArray.length(); j++) {
                                 JSONObject item = itemArray.getJSONObject(j);
-                                WeatherEntity weather = new WeatherEntity();
+                                WeatherDataEntity weather = new WeatherDataEntity();
 
                                 String stringweather = item.getString("tm");
                                 if (stringweather.length() == 16) { // "yyyy-MM-dd HH:mm" 형식이면
@@ -80,12 +80,12 @@ public class WeatherService {
                                 weather.setPop(item.optInt("pop", 0));
                                 // sname이 이미 존재하는지 확인
                                 String regionName = item.optString("spotName"); // 예시로 sname을 사용
-                                RegionsEntity region = regionsRepository.findBySname(regionName); // regionsRepository에서 region 조회
+                                RegionsDataEntity region = regionsDataRepository.findBySname(regionName); // regionsRepository에서 region 조회
 
                                 if (region != null) {
                                     weather.setRegions(region); // WeatherEntity에 지역 설정
                                     log.info("저장중 ------------------------------------{}",i);
-                                    weatherRepository.save(weather); // WeatherEntity 저장
+                                    weatherDataRepository.save(weather); // WeatherEntity 저장
                                 } else {
                                     log.error("Region not found for: " + regionName);
                                 }
