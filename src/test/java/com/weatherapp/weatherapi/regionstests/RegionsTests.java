@@ -1,7 +1,7 @@
 package com.weatherapp.weatherapi.regionstests;
 
 
-import com.weatherapp.weatherapi.regions.dto.RegionsListDTO;
+import com.weatherapp.weatherapi.regions.dto.RegionsSecondListDTO;
 import com.weatherapp.weatherapi.regions.repository.RegionsRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
@@ -26,7 +26,7 @@ public class RegionsTests {
 
         String cname = "경상남도";
 
-        List<RegionsListDTO> result = regionsRepository.RegionsSearch(cname);
+        List<RegionsSecondListDTO> result = regionsRepository.RegionsSecondSearch(cname);
 
         log.info(result);
 
